@@ -22,7 +22,7 @@ npm run dev
 
 Open http://localhost:3000 — run the intake like a buyer (add a photo when it asks),
 then check `/pipeline` to see your lead land, scored, next to the sample leads.
-`/benchmark` is where the Nebius numbers will go once they've actually been measured.
+`/benchmark` shows the measured Nebius results from the real run written up below.
 
 ```bash
 npm test
@@ -106,21 +106,43 @@ measured — and keeps its honest "Not measured yet" state when it doesn't.
 If no provider is configured, the script says so and writes nothing; a
 failed run never overwrites a good results file.
 
+### Measured results (real run, 2026-10-29)
+
+The benchmark has been run against the live endpoint. Source of record:
+[`data/benchmark-results.json`](data/benchmark-results.json) (generated
+2026-10-30T02:22:30Z), rendered live on `/benchmark`.
+
+- **Model:** `nvidia/Nemotron-3.5-Super-VL` on Nebius Token Factory
+- **Calls completed:** 3 of the 4 fixed lead conversations (1 failure, below)
+- **Mean latency:** 4,078.9 ms · **p95 latency:** 4,304.6 ms
+- **Throughput:** 223.4 tokens/sec, from the API's own usage fields
+- **Tokens measured:** 799 prompt / 2,732 completion across the completed calls
+- **Cost per qualified lead: $0.0008995** — under a tenth of a cent, computed
+  from measured usage at the verified published price above
+
+The failure, disclosed rather than dropped: the longest conversation
+(`priya-nair-realtor`) returned no content in both measured runs and is
+counted as a failure in the results file. Standalone retries show its
+reasoning trace alone uses ~700–900 of the harness's fixed 1,024-token
+budget, so it intermittently overflows the cap before answering. Same
+settings for every call — no cherry-picking.
+
+The comparison row on `/benchmark` still says "to be selected": no baseline
+provider was wired in, and we don't pad the page with numbers we didn't
+measure.
+
 ### What remains for the Nebius submission
 
-- Run the benchmark with a real key so `/benchmark` shows measured numbers.
-- Choose and configure a baseline provider for the comparison row (not
-  wired yet — the page says so).
-- Enter on Devpost before the Oct 30 deadline and submit the project —
-  the entrant's own taps. This repo builds the project; it does not submit it.
+- Submit the project on Devpost before **Fri Oct 30, 12:00 PM CT** — the
+  entrant's own tap. This repo builds the project; it does not submit it.
 
 ## The adapter plan (one core, three competitions)
 
 - **Meta Global AI Developer Hackathon** (submit Nov 4): wire Muse Spark as the
   model provider, SAM 3.1 as the vision provider, Muse Image for follow-up visuals.
 - **Nebius × NVIDIA** (Oct 30): Nemotron via Nebius Token Factory as the model
-  provider — adapter and benchmark harness are built (below); what remains is
-  a real key, a measured run to fill `/benchmark`, and the Devpost entry.
+  provider — adapter and benchmark harness are built (above), the measured
+  run is done and on `/benchmark`; the Devpost entry remains.
 - **PayPal AI** (Nov 12): add the close — a deposit flow on the qualified lead so
   an appointment becomes a secured booking instead of a no-show.
 

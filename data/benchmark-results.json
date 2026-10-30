@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-10-30T02:22:30.226Z",
+  "promptSet": {
+    "file": "data/qualification-prompts.json",
+    "count": 4
+  },
+  "results": [
+    {
+      "provider": "nebius-token-factory",
+      "model": "nvidia/Nemotron-3.5-Super-VL",
+      "endpoint": "https://api.tokenfactory.nebius.com/v1",
+      "status": "ok",
+      "calls": 3,
+      "failures": 1,
+      "meanLatencyMs": 4078.9,
+      "p95LatencyMs": 4304.6,
+      "tokensPerSecond": 223.4,
+      "totalPromptTokens": 799,
+      "totalCompletionTokens": 2732,
+      "costPerLeadUsd": 0.0008995,
+      "costNote": "Computed from measured token usage and the verified published price for nvidia/Nemotron-3.5-Super-VL ($0.3/1M input, $0.9/1M output). Each prompt in the set is one lead conversation, so mean cost per call = cost per lead qualified.",
+      "pricingSource": "Nebius blog (official), 'Three new open-weight models from US companies give builders more choice', 2026-10-16: 'On Token Factory: 0.30 USD per million input tokens and 0.90 USD per million output tokens.'"
+    }
+  ]
+}
