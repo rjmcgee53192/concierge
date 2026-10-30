@@ -44,7 +44,8 @@ function MeasuredRow({ r }: { r: BenchmarkProviderResult }) {
       </tr>
       <tr className="border-t border-white/[0.03]">
         <td colSpan={6} className="px-4 pb-3 pt-0 text-xs text-zinc-500">
-          {r.calls} calls, {r.failures} failures
+          {r.calls} of {r.calls + r.failures} calls completed · {r.failures}{" "}
+          {r.failures === 1 ? "failure" : "failures"}, counted — not dropped
           {r.totalPromptTokens !== null && r.totalCompletionTokens !== null
             ? ` · ${r.totalPromptTokens.toLocaleString()} prompt tokens, ${r.totalCompletionTokens.toLocaleString()} completion tokens`
             : " · API returned no usage fields for these calls"}

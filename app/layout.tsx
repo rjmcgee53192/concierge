@@ -32,8 +32,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex-1">{children}</main>
         <footer className="border-t border-white/[0.07] py-6">
           <p className="mx-auto w-full max-w-6xl px-5 text-xs text-zinc-500">
-            Concierge v0 — built for the fall 2026 hackathon circuit. Vision and model layers run on
-            stubs behind provider interfaces until hackathon API access lands; nothing here is a live AI call yet.
+            Concierge v0 — built for the fall 2026 hackathon circuit. The in-app chat and photo
+            analysis run on stub providers in this demo; the Nebius × NVIDIA numbers on the
+            Benchmark page come from real calls to the live Token Factory endpoint, measured
+            2026-10-29.
           </p>
         </footer>
       </body>
